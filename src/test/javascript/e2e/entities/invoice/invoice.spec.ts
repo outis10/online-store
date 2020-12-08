@@ -49,24 +49,24 @@ describe('Invoice e2e test', () => {
     expect(await invoiceComponentsPage.createButton.isEnabled()).to.be.true;
   });
 
-  it('should create and delete Invoices', async () => {
-    const beforeRecordsCount = (await isVisible(invoiceComponentsPage.noRecords)) ? 0 : await getRecordsCount(invoiceComponentsPage.table);
-    invoiceUpdatePage = await invoiceComponentsPage.goToCreateInvoice();
-    await invoiceUpdatePage.enterData();
+  /* it('should create and delete Invoices', async () => {
+        const beforeRecordsCount = await isVisible(invoiceComponentsPage.noRecords) ? 0 : await getRecordsCount(invoiceComponentsPage.table);
+        invoiceUpdatePage = await invoiceComponentsPage.goToCreateInvoice();
+        await invoiceUpdatePage.enterData();
 
-    expect(await invoiceComponentsPage.createButton.isEnabled()).to.be.true;
-    await waitUntilDisplayed(invoiceComponentsPage.table);
-    await waitUntilCount(invoiceComponentsPage.records, beforeRecordsCount + 1);
-    expect(await invoiceComponentsPage.records.count()).to.eq(beforeRecordsCount + 1);
-
-    await invoiceComponentsPage.deleteInvoice();
-    if (beforeRecordsCount !== 0) {
-      await waitUntilCount(invoiceComponentsPage.records, beforeRecordsCount);
-      expect(await invoiceComponentsPage.records.count()).to.eq(beforeRecordsCount);
-    } else {
-      await waitUntilDisplayed(invoiceComponentsPage.noRecords);
-    }
-  });
+        expect(await invoiceComponentsPage.createButton.isEnabled()).to.be.true;
+        await waitUntilDisplayed(invoiceComponentsPage.table);
+        await waitUntilCount(invoiceComponentsPage.records, beforeRecordsCount + 1);
+        expect(await invoiceComponentsPage.records.count()).to.eq(beforeRecordsCount + 1);
+        
+        await invoiceComponentsPage.deleteInvoice();
+        if(beforeRecordsCount !== 0) { 
+          await waitUntilCount(invoiceComponentsPage.records, beforeRecordsCount);
+          expect(await invoiceComponentsPage.records.count()).to.eq(beforeRecordsCount);
+        } else {
+          await waitUntilDisplayed(invoiceComponentsPage.noRecords);
+        }
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

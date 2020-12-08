@@ -49,26 +49,24 @@ describe('ProductOrder e2e test', () => {
     expect(await productOrderComponentsPage.createButton.isEnabled()).to.be.true;
   });
 
-  it('should create and delete ProductOrders', async () => {
-    const beforeRecordsCount = (await isVisible(productOrderComponentsPage.noRecords))
-      ? 0
-      : await getRecordsCount(productOrderComponentsPage.table);
-    productOrderUpdatePage = await productOrderComponentsPage.goToCreateProductOrder();
-    await productOrderUpdatePage.enterData();
+  /* it('should create and delete ProductOrders', async () => {
+        const beforeRecordsCount = await isVisible(productOrderComponentsPage.noRecords) ? 0 : await getRecordsCount(productOrderComponentsPage.table);
+        productOrderUpdatePage = await productOrderComponentsPage.goToCreateProductOrder();
+        await productOrderUpdatePage.enterData();
 
-    expect(await productOrderComponentsPage.createButton.isEnabled()).to.be.true;
-    await waitUntilDisplayed(productOrderComponentsPage.table);
-    await waitUntilCount(productOrderComponentsPage.records, beforeRecordsCount + 1);
-    expect(await productOrderComponentsPage.records.count()).to.eq(beforeRecordsCount + 1);
-
-    await productOrderComponentsPage.deleteProductOrder();
-    if (beforeRecordsCount !== 0) {
-      await waitUntilCount(productOrderComponentsPage.records, beforeRecordsCount);
-      expect(await productOrderComponentsPage.records.count()).to.eq(beforeRecordsCount);
-    } else {
-      await waitUntilDisplayed(productOrderComponentsPage.noRecords);
-    }
-  });
+        expect(await productOrderComponentsPage.createButton.isEnabled()).to.be.true;
+        await waitUntilDisplayed(productOrderComponentsPage.table);
+        await waitUntilCount(productOrderComponentsPage.records, beforeRecordsCount + 1);
+        expect(await productOrderComponentsPage.records.count()).to.eq(beforeRecordsCount + 1);
+        
+        await productOrderComponentsPage.deleteProductOrder();
+        if(beforeRecordsCount !== 0) { 
+          await waitUntilCount(productOrderComponentsPage.records, beforeRecordsCount);
+          expect(await productOrderComponentsPage.records.count()).to.eq(beforeRecordsCount);
+        } else {
+          await waitUntilDisplayed(productOrderComponentsPage.noRecords);
+        }
+    }); */
 
   after(async () => {
     await navBarPage.autoSignOut();

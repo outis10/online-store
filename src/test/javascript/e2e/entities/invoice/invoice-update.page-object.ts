@@ -7,6 +7,7 @@ export default class InvoiceUpdatePage {
   pageTitle: ElementFinder = element(by.id('storeApp.invoice.home.createOrEditLabel'));
   saveButton: ElementFinder = element(by.id('save-entity'));
   cancelButton: ElementFinder = element(by.id('cancel-save'));
+  codeInput: ElementFinder = element(by.css('input#invoice-code'));
   dateInput: ElementFinder = element(by.css('input#invoice-date'));
   detailsInput: ElementFinder = element(by.css('input#invoice-details'));
   statusSelect: ElementFinder = element(by.css('select#invoice-status'));
@@ -17,6 +18,14 @@ export default class InvoiceUpdatePage {
 
   getPageTitle() {
     return this.pageTitle;
+  }
+
+  async setCodeInput(code) {
+    await this.codeInput.sendKeys(code);
+  }
+
+  async getCodeInput() {
+    return this.codeInput.getAttribute('value');
   }
 
   async setDateInput(date) {
@@ -102,6 +111,9 @@ export default class InvoiceUpdatePage {
   }
 
   async enterData() {
+    await waitUntilDisplayed(this.saveButton);
+    await this.setCodeInput('code');
+    expect(await this.getCodeInput()).to.match(/code/);
     await waitUntilDisplayed(this.saveButton);
     await this.setDateInput('01/01/2001' + protractor.Key.TAB + '02:30AM');
     expect(await this.getDateInput()).to.contain('2001-01-01T02:30');

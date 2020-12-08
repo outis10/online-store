@@ -26,6 +26,12 @@ export const InvoiceDetail = (props: IInvoiceDetailProps) => {
         </h2>
         <dl className="jh-entity-details">
           <dt>
+            <span id="code">
+              <Translate contentKey="storeApp.invoice.code">Code</Translate>
+            </span>
+          </dt>
+          <dd>{invoiceEntity.code}</dd>
+          <dt>
             <span id="date">
               <Translate contentKey="storeApp.invoice.date">Date</Translate>
             </span>
@@ -66,7 +72,7 @@ export const InvoiceDetail = (props: IInvoiceDetailProps) => {
           <dt>
             <Translate contentKey="storeApp.invoice.order">Order</Translate>
           </dt>
-          <dd>{invoiceEntity.order ? invoiceEntity.order.id : ''}</dd>
+          <dd>{invoiceEntity.order ? invoiceEntity.order.code : ''}</dd>
         </dl>
         <Button tag={Link} to="/invoice" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -6,6 +6,7 @@ import { PaymentMethod } from 'app/shared/model/enumerations/payment-method.mode
 
 export interface IInvoice {
   id?: number;
+  code?: string;
   date?: string;
   details?: string;
   status?: InvoiceStatus;

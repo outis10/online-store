@@ -146,6 +146,33 @@ export const Product = (props: IProductProps) => {
                         )}
 
                       </div>
+<<<<<<< HEAD
+                    ) : null}
+                  </td>
+                  <td>
+                    {product.productCategory ? (
+                      <Link to={`product-category/${product.productCategory.id}`}>{product.productCategory.name}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
+                  <td className="text-right">
+                    <div className="btn-group flex-btn-group-container">
+                      <Button tag={Link} to={`${match.url}/${product.id}`} color="info" size="sm">
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
+                      </Button>
+                      <Button
+                        tag={Link}
+                        to={`${match.url}/${product.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        color="primary"
+                        size="sm"
+                      >
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+=======
                       <small className="mb-1">{product.description}</small>
                       <p className="mb-1">Price: <NumberFormat value={product.price} displayType={'text'}
                                                                thousandSeparator={true} prefix={'$'}/></p>
@@ -160,6 +187,7 @@ export const Product = (props: IProductProps) => {
                           >
                             <FontAwesomeIcon icon="pencil-alt"/>{' '}
                             <span className="d-none d-md-inline">
+>>>>>>> d4f8d26... update product listing page UI
                           <Translate contentKey="entity.action.edit">Edit</Translate>
                         </span>
                           </Button>
