@@ -84,6 +84,19 @@ export const InvoiceUpdate = (props: IInvoiceUpdateProps) => {
                 </AvGroup>
               ) : null}
               <AvGroup>
+                <Label id="codeLabel" for="invoice-code">
+                  <Translate contentKey="storeApp.invoice.code">Code</Translate>
+                </Label>
+                <AvField
+                  id="invoice-code"
+                  type="text"
+                  name="code"
+                  validate={{
+                    required: { value: true, errorMessage: translate('entity.validation.required') },
+                  }}
+                />
+              </AvGroup>
+              <AvGroup>
                 <Label id="dateLabel" for="invoice-date">
                   <Translate contentKey="storeApp.invoice.date">Date</Translate>
                 </Label>
@@ -171,16 +184,25 @@ export const InvoiceUpdate = (props: IInvoiceUpdateProps) => {
                 <Label for="invoice-order">
                   <Translate contentKey="storeApp.invoice.order">Order</Translate>
                 </Label>
-                <AvInput id="invoice-order" type="select" className="form-control" name="order.id">
-                  <option value="" key="0" />
+                <AvInput
+                  id="invoice-order"
+                  type="select"
+                  className="form-control"
+                  name="order.id"
+                  value={isNew ? productOrders[0] && productOrders[0].id : invoiceEntity.order?.id}
+                  required
+                >
                   {productOrders
                     ? productOrders.map(otherEntity => (
                         <option value={otherEntity.id} key={otherEntity.id}>
-                          {otherEntity.id}
+                          {otherEntity.code}
                         </option>
                       ))
                     : null}
                 </AvInput>
+                <AvFeedback>
+                  <Translate contentKey="entity.validation.required">This field is required.</Translate>
+                </AvFeedback>
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/invoice" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
