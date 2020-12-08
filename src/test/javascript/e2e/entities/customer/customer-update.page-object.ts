@@ -135,8 +135,8 @@ export default class CustomerUpdatePage {
     await waitUntilDisplayed(this.saveButton);
     await this.genderSelectLastOption();
     await waitUntilDisplayed(this.saveButton);
-    await this.setEmailInput('}o@)Y&lt;L.d52[');
-    expect(await this.getEmailInput()).to.match(/}o@)Y&lt;L.d52\[/);
+    await this.setEmailInput('}o@Y&lt;L.d52[');
+    expect(await this.getEmailInput()).to.match(/}o@Y&lt;L.d52\[/);
     await waitUntilDisplayed(this.saveButton);
     await this.setPhoneInput('phone');
     expect(await this.getPhoneInput()).to.match(/phone/);
