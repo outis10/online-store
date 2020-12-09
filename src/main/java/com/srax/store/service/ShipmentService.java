@@ -2,6 +2,8 @@ package com.srax.store.service;
 
 import com.srax.store.domain.Shipment;
 import com.srax.store.repository.ShipmentRepository;
+import com.srax.store.security.AuthoritiesConstants;
+import com.srax.store.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,12 +44,19 @@ public class ShipmentService {
      * Get all the shipments.
      *
      * @param pageable the pagination information.
-     * @return the list of entities.
+     * @return the list of entitiesnd.
      */
     @Transactional(readOnly = true)
     public Page<Shipment> findAll(Pageable pageable) {
         log.debug("Request to get all Shipments");
-        return shipmentRepository.findAll(pageable);
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            return shipmentRepository.findAll(pageable);
+        } else {
+            return shipmentRepository.findAllByInvoiceOrderCustomerUserLogin(
+                SecurityUtils.getCurrentUserLogin().get(),
+                pageable);
+        }
+
     }
 
 
@@ -60,7 +69,15 @@ public class ShipmentService {
     @Transactional(readOnly = true)
     public Optional<Shipment> findOne(Long id) {
         log.debug("Request to get Shipment : {}", id);
-        return shipmentRepository.findById(id);
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            return shipmentRepository.findById(id);
+        } else {
+            return shipmentRepository.findOneByIdAndInvoiceOrderCustomerUserLogin(
+                id,
+                SecurityUtils.getCurrentUserLogin().get()
+            );
+        }
+
     }
 
     /**
