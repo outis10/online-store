@@ -52,7 +52,7 @@ public class OrderItemService {
         if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
             return orderItemRepository.findAll(pageable);
         } else {
-            return orderItemRepository.findAllOrderCustomerUserLogin(
+            return orderItemRepository.findAllByOrderCustomerUserLogin(
                 SecurityUtils.getCurrentUserLogin().get(),
                 pageable);
         }

@@ -5,7 +5,7 @@ import { waitUntilAnyDisplayed, waitUntilDisplayed, click, waitUntilHidden, isVi
 import NavBarPage from './../../page-objects/navbar-page';
 
 import ProductUpdatePage from './product-update.page-object';
-
+var sinon = require('sinon');
 const expect = chai.expect;
 export class ProductDeleteDialog {
   deleteModal = element(by.className('modal'));
@@ -23,12 +23,15 @@ export class ProductDeleteDialog {
 
 export default class ProductComponentsPage {
   createButton: ElementFinder = element(by.id('jh-create-entity'));
-  deleteButtons = element.all(by.css('div table .btn-danger'));
-  title: ElementFinder = element(by.id('product-heading'));
-  noRecords: ElementFinder = element(by.css('#app-view-container .table-responsive div.alert.alert-warning'));
-  table: ElementFinder = element(by.css('#app-view-container div.table-responsive > table'));
 
-  records: ElementArrayFinder = this.table.all(by.css('tbody tr'));
+  deleteButtons = element.all(by.css('#app-view-container div.list-group .btn-danger'));
+  title: ElementFinder = element(by.id('product-heading'));
+  noRecords: ElementFinder = element(by.css('#app-view-container .list_group div.alert.alert-warning'));
+
+  table: ElementFinder = element(by.css('#app-view-container div.list-group > a'));
+
+
+  records: ElementArrayFinder = this.table.all(by.css('row'));
 
   getDetailsButton(record: ElementFinder) {
     return record.element(by.css('a.btn.btn-info.btn-sm'));
@@ -54,6 +57,7 @@ export default class ProductComponentsPage {
   }
 
   async deleteProduct() {
+    console.log('resgistrosd:::::::' + this.records.last());
     const deleteButton = this.getDeleteButton(this.records.last());
     await click(deleteButton);
 

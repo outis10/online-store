@@ -78,120 +78,118 @@ export const Product = (props: IProductProps) => {
         </Link>
       </h2>
       <div>
-        {productList && productList.length > 0 ? (
-          <div>
-            <div className="mb-2 d-flex justify-content-end align-items-center">
-              <span className="mx-2 col-1">Sort by</span>
-              <div className="btn-group" role="group">
-                <button type="button" className="btn btn-light" onClick={sort('name')}>
+        {productList && productList.length > 0 ? <div>
+          <div className="mb-2 d-flex justify-content-end align-items-center">
+            <span className="mx-2 col-1">Sort by</span>
+            <div className="btn-group" role="group">
+              <button type="button" className="btn btn-light" onClick={sort('name')}>
                   <span className="d-flex">
                     <Translate contentKey="storeApp.product.name">Name</Translate>&nbsp;
-                    <FontAwesomeIcon icon="sort" />
+                    <FontAwesomeIcon icon="sort"/>
                   </span>
-                </button>
-                <button type="button" className="btn btn-light" onClick={sort('price')}>
+              </button>
+              <button type="button" className="btn btn-light" onClick={sort('price')}>
                   <span className="d-flex">
                     <Translate contentKey="storeApp.product.price">Price</Translate>&nbsp;
-                    <FontAwesomeIcon icon="sort" />
+                    <FontAwesomeIcon icon="sort"/>
                   </span>
-                </button>
-                <button type="button" className="btn btn-light" onClick={sort('size')}>
+              </button>
+              <button type="button" className="btn btn-light" onClick={sort('size')}>
                   <span className="d-flex">
                     <Translate contentKey="storeApp.product.size">Size</Translate>&nbsp;
-                    <FontAwesomeIcon icon="sort" />
+                    <FontAwesomeIcon icon="sort"/>
                   </span>
-                </button>
-                <button type="button" className="btn btn-light" onClick={sort('productCategory.id')}>
+              </button>
+              <button type="button" className="btn btn-light" onClick={sort('productCategory.id')}>
                   <span className="d-flex">
                     <Translate contentKey="storeApp.product.productCategory">Product Category</Translate>&nbsp;
-                    <FontAwesomeIcon icon="sort" />
+                    <FontAwesomeIcon icon="sort"/>
                   </span>
-                </button>
-
-              </div>
-
+              </button>
 
             </div>
-            <div className="list-group">
-              {productList.map((product, i) => (
-                <a className="list-group-item list-group-item-action flex-column align-items-start" key={`entity-${i}`}>
-                  <div className="row">
-                    <div className="col-2 col-xs-12 justify-content-center">
-                      {product.image ? (
-                        <div>
-                          {product.imageContentType ? (
-                            <a onClick={openFile(product.imageContentType, product.image)}>
-                              <img src={`data:${product.imageContentType};base64,${product.image}`}
-                                   style={{maxHeight: '150px'}}/>
-                              &nbsp;
-                            </a>
-                          ) : null}
-                        </div>
-                      ) : null}
+
+
+          </div>
+          <div className="list-group">
+            {productList && productList.length > 0 &&
+            productList.map((product, i) => (
+              <a className="list-group-item list-group-item-action flex-column align-items-start" key={`entity-${i}`}>
+                <div className="row">
+                  <div className="col-2 col-xs-12 justify-content-center">
+                    {product.image ? (
+                      <div>
+                        {product.imageContentType ? (
+                          <a onClick={openFile(product.imageContentType, product.image)}>
+                            <img src={`data:${product.imageContentType};base64,${product.image}`}
+                                 style={{maxHeight: '150px'}}/>
+                            &nbsp;
+                          </a>
+                        ) : null}
+                      </div>
+                    ) : null}
+
+                  </div>
+                  <div className="col col-xs-12">
+                    <div className="d-flex w-100 justify-content-between">
+                      <Link to={`${match.url}/${product.id}`} color="link">
+                        <h5 className="mb-1">{product.name}</h5>
+                      </Link>
+                      {product.productCategory ? (
+                        <small>
+                          Category:
+                          <Link
+                            to={`product-category/${product.productCategory.id}`}> {product.productCategory.id}</Link>
+                        </small>
+                      ) : (
+                        ''
+                      )}
 
                     </div>
-                    <div className="col col-xs-12">
-                      <div className="d-flex w-100 justify-content-between">
-                        <Link to={`${match.url}/${product.id}`} color="link">
-                          <h5 className="mb-1">{product.name}</h5>
-                        </Link>
-                        {product.productCategory ? (
-                          <small>
-                            Category:
-                            <Link
-                              to={`product-category/${product.productCategory.id}`}> {product.productCategory.id}</Link>
-                          </small>
-                        ) : (
-                          ''
-                        )}
-
-                      </div>
-                      <small className="mb-1">{product.description}</small>
-                      <p className="mb-1">Price: <NumberFormat value={product.price} displayType={'text'}
-                                                               thousandSeparator={true} prefix={'$'}/></p>
-                      <small className="mb-1">Size: <Translate contentKey={`storeApp.Size.${product.size}`}/></small>
-                      {isAdmin && (
-                        <div>
-                          <Button
-                            tag={Link}
-                            to={`${match.url}/${product.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                            color="primary"
-                            size="sm"
-                          >
-                            <FontAwesomeIcon icon="pencil-alt"/>{' '}
-                            <span className="d-none d-md-inline">
+                    <small className="mb-1">{product.description}</small>
+                    <p className="mb-1">Price: <NumberFormat value={product.price} displayType={'text'}
+                                                             thousandSeparator={true} prefix={'$'}/></p>
+                    <small className="mb-1">Size: <Translate contentKey={`storeApp.Size.${product.size}`}/></small>
+                    {isAdmin && (
+                      <div>
+                        <Button
+                          tag={Link}
+                          to={`${match.url}/${product.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                          color="primary"
+                          size="sm"
+                        >
+                          <FontAwesomeIcon icon="pencil-alt"/>{' '}
+                          <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.edit">Edit</Translate>
                         </span>
-                          </Button>
-                          <Button
-                            tag={Link}
-                            to={`${match.url}/${product.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
-                            color="danger"
-                            size="sm"
-                          >
-                            <FontAwesomeIcon icon="trash"/>{' '}
-                            <span className="d-none d-md-inline">
+                        </Button>
+                        <Button
+                          tag={Link}
+                          to={`${match.url}/${product.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                          color="danger"
+                          size="sm"
+                        >
+                          <FontAwesomeIcon icon="trash"/>{' '}
+                          <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.delete">Delete</Translate>
                         </span>
-                          </Button>
-                        </div>
-                      )}
-                    </div>
+                        </Button>
+                      </div>
+                    )}
                   </div>
 
-                </a>
+                </div>
 
-              ))}
+              </a>
 
-            </div>
+            ))}
+
           </div>
-        ) : (
-          !loading && (
-            <div className="alert alert-warning">
-              <Translate contentKey="storeApp.product.home.notFound">No Products found</Translate>
-            </div>
-          )
 
+        </div> : !loading && (
+          <div className="alert alert-warning">
+            <Translate contentKey="storeApp.product.home.notFound">No Products found</Translate>
+          </div>
         )}
       </div>
       {props.totalItems ? (
