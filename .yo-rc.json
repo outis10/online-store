@@ -38,6 +38,9 @@
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": ["en", "es"],
-    "blueprints": []
+    "blueprints": [],
+    "herokuAppName": "outis-store",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11"
   }
 }
