@@ -5,7 +5,7 @@ import { waitUntilAnyDisplayed, waitUntilDisplayed, click, waitUntilHidden, isVi
 import NavBarPage from './../../page-objects/navbar-page';
 
 import ProductUpdatePage from './product-update.page-object';
-var sinon = require('sinon');
+
 const expect = chai.expect;
 export class ProductDeleteDialog {
   deleteModal = element(by.className('modal'));
@@ -57,7 +57,6 @@ export default class ProductComponentsPage {
   }
 
   async deleteProduct() {
-    console.log('resgistrosd:::::::' + this.records.last());
     const deleteButton = this.getDeleteButton(this.records.last());
     await click(deleteButton);
 
